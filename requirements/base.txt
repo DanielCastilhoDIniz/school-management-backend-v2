@@ -1,0 +1,27 @@
+# Core framework
+Django>=5.1,<5.2
+djangorestframework>=3.15,<3.16
+djangorestframework-simplejwt>=5.3,<6.0
+
+# Banco de dados
+psycopg[binary]>=3.2,<3.3          # driver PostgreSQL moderno e sem dependências C
+
+# Documentação API
+drf-spectacular>=0.27,<0.28
+
+# Filtros e busca avançada
+django-filter>=24.3,<25.0
+
+# Variáveis de ambiente
+django-environ>=0.11,<0.12
+python-dotenv>=1.0,<2.0            # fallback / compatibilidade
+
+# Internacionalização (se for usar rosetta ou precisar de mais ferramentas)
+django-rosetta>=0.10,<0.11         # opcional, mas muito útil para gerenciar traduções
+
+# Arquivos / media
+Pillow>=10.4,<11.0                 # processamento de imagens (fotos de alunos, materiais)
+
+# Tarefas assíncronas (Celery)
+celery>=5.4,<5.5
+redis>=5.0,<6.0                    # broker + backend de resultados

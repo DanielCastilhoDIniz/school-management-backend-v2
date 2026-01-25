@@ -1,0 +1,23 @@
+-r base.txt
+
+# Debug e desenvolvimento
+django-debug-toolbar>=4.4,<5.0
+django-extensions>=3.2,<4.0
+
+# Testes
+pytest>=8.3,<9.0
+pytest-django>=4.9,<5.0
+pytest-factoryboy>=2.7,<3.0
+factory-boy>=3.3,<4.0
+coverage>=7.6,<8.0
+
+# Qualidade de código e formatação
+black>=24.8,<25.0
+ruff>=0.6,<0.7
+isort>=5.13,<6.0
+pre-commit>=4.0,<5.0               # hooks git
+
+# Outras ferramentas úteis
+ipdb>=0.13,<0.14                   # debugger interativo
+django-stubs[compatible-mypy]>=5.0  # mypy + stubs para Django (opcional mas recomendado)
+mypy>=1.11,<1.12

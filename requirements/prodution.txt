@@ -1,0 +1,16 @@
+-r base.txt
+
+# Servidor WSGI / ASGI
+gunicorn>=23.0,<24.0               # WSGI
+uvicorn[standard]>=0.30,<0.31      # ASGI (se quiser experimentar Daphne ou Uvicorn)
+
+# Compressão e performance
+brotli>=1.1,<2.0
+django-compressor>=4.5,<5.0        # compressão de static files (opcional)
+
+# Logging e monitoramento (opcionais, mas recomendados em prod)
+sentry-sdk[django]>=2.13,<3.0      # monitoramento de erros
+django-prometheus>=2.3,<3.0        # métricas Prometheus (opcional)
+
+# Segurança adicional
+django-csp>=3.7,<4.0               # Content Security Policy (opcional mas bom)
