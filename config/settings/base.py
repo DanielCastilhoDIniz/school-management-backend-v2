@@ -29,7 +29,11 @@ INSTALLED_APPS = [
     "django_extensions",
 
     # dev
-    "apps.common.apps.CommonConfig",
+    # "apps.common.apps.CommonConfig",
+
+    # apps
+    "apps.common",
+    "apps.users",
 
 ]
 
@@ -77,6 +81,8 @@ DATABASES = {
 }
 
 # AUTH_PASSWORD_VALIDATORS = [...]  # mantenha os padrões por enquanto
+
+AUTH_USER_MODEL = "users.User"
 
 LANGUAGE_CODE = "pt-br"
 TIME_ZONE = "America/Sao_Paulo"

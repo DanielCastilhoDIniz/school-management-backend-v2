@@ -95,14 +95,23 @@ A API **não espelha o banco de dados**, mas reflete casos de uso reais, com aç
 ## 5. Autenticação e Autorização (RBAC)
 
 - **Autenticação**: `djangorestframework-simplejwt`
-  - `POST /api/v1/token/` → Obter access + refresh
-  - `POST /api/v1/token/refresh/` → Renovar token
-- **Permissões customizadas** (exemplos):
-  - `IsProfessorDaTurma`
-  - `IsCoordenadorDaUnidade`
-  - `IsAlunoOuResponsavelDono`
+  - `POST /api/v1/token/` → access + refresh
+  - `POST /api/v1/token/refresh/`
+
+- **Modelo de Usuários**:
+  - `Pessoa` (AbstractUser) com `email` como identificador principal
+  - Campo `tipo` para roles: ALUNO, PROFESSOR, COORDENADOR, DIRETOR, RESPONSAVEL, etc.
+  - Perfis estendidos via OneToOne (ex.: AlunoPerfil com responsável)
+
+- **Permissões customizadas**:
+  - `IsAuthenticated` (base)
   - `IsAdminDaInstituicao`
-- Uso: `@permission_classes([IsAuthenticated, IsProfessorDaTurma])`
+  - `IsCoordenadorDaUnidade`
+  - `IsProfessorDaTurma`
+  - `IsAlunoOuResponsavelDono`
+  - Uso: `@permission_classes([IsAuthenticated, IsProfessorDaTurma])`
+
+- **RBAC Contextual**: Permissões verificam `request.user.instituicao` e relações (ex.: professor leciona na turma).
 
 ## 6. Internacionalização (i18n)
 
