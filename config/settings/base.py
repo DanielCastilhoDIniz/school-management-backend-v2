@@ -32,8 +32,11 @@ INSTALLED_APPS = [
     # "apps.common.apps.CommonConfig",
 
     # apps
-    "apps.common",
-    "apps.users",
+
+
+    # 'apps.users.apps.UsersConfig',
+    'src.apps.users.apps.UsersConfig',
+    'src.apps.common.apps.CommonConfig',
 
 ]
 
@@ -82,7 +85,7 @@ DATABASES = {
 
 # AUTH_PASSWORD_VALIDATORS = [...]  # mantenha os padrões por enquanto
 
-AUTH_USER_MODEL = "users.User"
+AUTH_USER_MODEL = 'users.CustomUser'
 
 LANGUAGE_CODE = "pt-br"
 TIME_ZONE = "America/Sao_Paulo"
