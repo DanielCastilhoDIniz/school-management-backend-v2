@@ -2,7 +2,7 @@ from django.db import models
 
 from django.utils.translation import gettext_lazy as _
 
-from apps.common.models import Base
+from apps.common.models.base import Base
 from src.apps.users.models import CustomUser
 
 
@@ -75,3 +75,8 @@ class NetSchools(Base):
         ordering = ["trade_name"]
         db_table = "school_networks"
         db_table_comment = "Educational institution networks"
+        indexes = [
+            models.Index(fields=['trade_name']),
+            models.Index(fields=['legal_name']),
+            models.Index(fields=['tax_identification_number']),
+            ]
