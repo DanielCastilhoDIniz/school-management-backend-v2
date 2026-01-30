@@ -6,12 +6,8 @@ from apps.common.models.base import Base
 from apps.common.models.address import Address
 from apps.institutions.models.models_net import NetSchools
 
-from src.apps.users.models import CustomUser
-
-
 from django.core.exceptions import ValidationError
 
-from datetime import date
 import re
 from django.core.validators import RegexValidator
 
@@ -38,7 +34,7 @@ class UnitSchool(Base, Address):
         on_delete=models.PROTECT,
         help_text=_("Find")
     )
-    
+
     # Unique Unit Identity
     unit_legal_name = models.CharField(
         _("legal_name_unit_school"),
@@ -82,3 +78,5 @@ class UnitSchool(Base, Address):
         verbose_name_plural = _("Units Schools")
         ordering = ["trade_name"]
         db_table_comment = "Educational institution units"
+
+    # Fazer validações!!!!!!!!!!!!!!!!!!!
