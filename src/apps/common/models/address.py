@@ -45,9 +45,6 @@ class Address(models.Model):
 
     state = BRStateField(
         verbose_name=_("state"),
-        blank=True,
-        blank_label=_("Select a state"),
-        null=True,
         )
 
     city = models.CharField(
@@ -65,7 +62,7 @@ class Address(models.Model):
         max_length=200,
         verbose_name=_("street"),
         validators=[MinLengthValidator(3)],
-        help_text=_("Street name and number"),
+        help_text=_("Street, avenue, etc."),
         )
 
     number = models.CharField(
@@ -109,10 +106,10 @@ class Address(models.Model):
             self.street = self.street.strip()
 
         if self.city:
-            self.city = self.city.strip()
+            self.city = self.city.strip().title()
 
         if self.district:
-            self.district = self.district.strip()
+            self.district = self.district.strip().title()
         self.complement = (
             self.complement or "").strip()
 
@@ -127,15 +124,16 @@ class Address(models.Model):
             # Validação do CEP usando a função existente
             try:
                 validate_brazilian_zipcode(self.zip_code)
-                # Formatação manual
                 numbers = re.sub(r'\D', '', str(self.zip_code))
-                if len(numbers) == 8:
-                    self.zip_code = f"{numbers[:5]}-{numbers[5:]}"
+                self.zip_code = f"{numbers[:5]}-{numbers[5:]}"
             except ValidationError as e:
                 errors['zip_code'] = str(e)
-
         if errors:
             raise ValidationError(errors)
+
+        if self.street and len(self.street) < 3:
+            errors['street'] = _(
+                "Street name must have at least 3 characters.")
 
     def save(self, *args, **kwargs):
         self.full_clean()
@@ -178,5 +176,3 @@ class Address(models.Model):
             parts.append(str(self.country.name))
 
         return ", ".join(parts)
-
-

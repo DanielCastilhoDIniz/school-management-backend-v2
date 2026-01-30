@@ -27,7 +27,7 @@ INSTALLED_APPS = [
     "drf_spectacular",
     "django_filters",
     "django_extensions",
-     'django_countries',
+    'django_countries',
 
     # dev
     # "apps.common.apps.CommonConfig",
@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     # 'apps.users.apps.UsersConfig',
     'src.apps.users.apps.UsersConfig',
     'src.apps.common.apps.CommonConfig',
+    'src.apps.institutions.apps.InstitutionsConfig',
 
 ]
 
