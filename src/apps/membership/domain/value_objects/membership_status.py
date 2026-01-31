@@ -1,4 +1,4 @@
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from datetime import date, datetime
 from enum import Enum
 
@@ -16,6 +16,7 @@ class MembershipState(Enum):
     EXPIRED = 'expired'
 
 
+# value object cant be change
 @dataclass(frozen=True)
 class MembershipStatus:
     """
@@ -24,23 +25,16 @@ class MembershipStatus:
     """
     state: MembershipState
     start_date: date
-    end_date = date | None
+    end_date:  date | None = field(default=None)
 
     def __post_init__(self):
         if self.end_date and self.end_date < self.start_date:
             raise ValueError("End date cannot be earlier than start date.")
 
     def is_active_on(self, when: date | datetime) -> bool:
-
         when_date = when.date() if isinstance(when, datetime) else when
 
-        if self.state in {
-            MembershipState.CANCELED,
-            MembershipState.SUSPENDED,
-            MembershipState.COMPLETED,
-            MembershipState.EXPIRED,
-            MembershipState.INACTIVE,
-        }:
+        if self.state != MembershipState.ACTIVE:
             return False
 
         if when_date < self.start_date:
@@ -49,8 +43,7 @@ class MembershipStatus:
         if self.end_date and when_date > self.end_date:
             return False
 
-        if when_date <= self.end_date:
-            return True
+        return True
 
     def is_active_now(self) -> bool:
         return self.is_active_on(datetime.now())
@@ -77,6 +70,10 @@ class MembershipStatus:
         days_left = self.days_until_expiration()
         if days_left is None:
             return False
+        return days_left <= 30
+
+
+
 
 
 
